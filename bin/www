@@ -26,7 +26,7 @@ channel.bind('request', data => {
         .catch(error => console.log(error.response.data))
 });
 
-channel.bind('devices', function (data) {
+channel.bind('devices', data => {
     axios(host + '/api/v2/devices')
         .then(response => axios.post(data.callback, response.data))
         .catch(error => console.log(error.response.data))
