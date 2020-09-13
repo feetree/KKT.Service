@@ -5,9 +5,9 @@
  */
 
 
-var app = require('../app');
-var debug = require('debug')('kkt:server');
-var http = require('http');
+let app = require('../app');
+let debug = require('debug')('kkt:server');
+let http = require('http');
 let axios = require('axios');
 Pusher = require('pusher-js');
 Pusher.logToConsole = true;
@@ -20,20 +20,16 @@ let pusher = new Pusher(process.env.PUSHER_KEY, {
 
 let channel = pusher.subscribe(process.env.PUSHER_CHANNEL);
 
-channel.bind('request', function (data) {
-    axios.post(host + '/api/v2/requests', data).then(response => {
-        console.log(response.data)
-    }).catch(error => {
-        console.log(error)
-    })
+channel.bind('request', data => {
+    axios.post(host + '/api/v2/requests', data)
+        .then(response => console.log(response.data))
+        .catch(error => console.log(error.response.data))
 });
 
 channel.bind('devices', function (data) {
-    axios(host + '/api/v2/devices').then(response => {
-        axios.post(data.callback, response.data)
-    }).catch(error => {
-        console.log(error)
-    })
+    axios(host + '/api/v2/devices')
+        .then(response => axios.post(data.callback, response.data))
+        .catch(error => console.log(error.response.data))
 });
 
 /**
@@ -58,7 +54,7 @@ server.on('listening', onListening);
  */
 
 function normalizePort(val) {
-    var port = parseInt(val, 10);
+    let port = parseInt(val, 10);
 
     if (isNaN(port)) {
         // named pipe
@@ -82,7 +78,7 @@ function onError(error) {
         throw error;
     }
 
-    var bind = typeof port === 'string'
+    let bind = typeof port === 'string'
         ? 'Pipe ' + port
         : 'Port ' + port;
 
@@ -106,8 +102,8 @@ function onError(error) {
  */
 
 function onListening() {
-    var addr = server.address();
-    var bind = typeof addr === 'string'
+    let addr = server.address();
+    let bind = typeof addr === 'string'
         ? 'pipe ' + addr
         : 'port ' + addr.port;
     debug('Listening on ' + bind);
