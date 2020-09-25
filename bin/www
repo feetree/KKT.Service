@@ -31,6 +31,17 @@ channel.bind('devices', data => {
         .then(response => axios.post(data.callback, response.data))
         .catch(error => console.log(error.response.data))
 });
+channel.bind('request.get', data => {
+    axios(host + '/api/v2/requests/' + data.uuid)
+        .then(response => axios.post(data.callback, response.data))
+        .catch(error => console.log(error.response.data))
+});
+
+channel.bind('devices.create', data => {
+    axios.post(host + '/api/v2/devices')
+        .then(response => axios.post(data.callback, response.data))
+        .catch(error => console.log(error.response.data))
+});
 
 /**
  * Get port from environment and store in Express.
