@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-
+require('dotenv').config()
 let axios = require('axios')
 Pusher = require('pusher-js')
 Pusher.logToConsole = true
