@@ -6,20 +6,10 @@
     "start": "node ./bin/www",
     "service-install": "node ./install.js"
   },
-  "dependencies": {
-    "@sentry/node": "^5.23.0",
-    "@sentry/tracing": "^5.23.0",
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "express": "~4.16.1",
-    "http-errors": "~1.6.3",
-    "morgan": "~1.9.1",
-    "pug": "2.0.0-beta11"
-  },
   "devDependencies": {
-    "axios": "^0.20.0",
-    "dotenv": "^8.2.0",
-    "node-windows": "^1.0.0-beta.5",
-    "pusher-js": "^7.0.0"
+    "axios": "^0.27.2",
+    "dotenv": "^16.0.1",
+    "node-windows": "^1.0.0-beta.7",
+    "pusher-js": "^7.3.0"
   }
 }
