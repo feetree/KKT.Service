@@ -32,4 +32,12 @@ channel.bind('devices.create', data => {
     .then(response => axios.post(data.callback, response.data))
     .catch(error => console.log(error.response.data))
 })
+channel.bind('devices.create.new', data => {
+  axios(`https://kkt.wbtgroup.ru/api/v2/receipts/${data.uuid}`).then((response) => {
+    let data = response.data
+    axios.post(host + '/api/v2/devices')
+      .then(response => axios.post(data.callback, response.data))
+      .catch(error => console.log(error.response.data))
+  })
+})
 
